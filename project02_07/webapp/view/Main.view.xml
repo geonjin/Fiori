@@ -1,0 +1,222 @@
+<mvc:View
+    controllerName="odata.project0207.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar" > 
+
+    <core:Fragment fragmentName="odata.project0207.view.fragment.Customor" />; <!-- view 단에 만든fragment view붙이기 그래야 컨트롤러
+    에서 부를때 모델을 따로 생성 안할수 있음-->
+
+
+
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        useIconTabBar="true"
+        upperCaseAnchorBar="false">
+        <!--useIconTabBar로 화면을 탭으로 나눌수있음-->
+        <headerTitle>
+            <ObjectPageHeader objectTitle="Section sample"></ObjectPageHeader>
+        </headerTitle>
+
+        <headerContent>
+            <!-- <m:Input width="200px" showValueHelp="true" 
+                    valueHelpRequest="onValueHelp"
+                    placeholder="Customer I1D"
+                    id="oInput"
+                    value="{main>/CustomerID}"
+            />
+            <m:Button width="100px"
+                      type="Emphasized"
+                      text="Search"
+                      press="onSearch"
+            ></m:Button> -->
+                        <fb:FilterBar id="filterbar" filterContainerWidth="24rem" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" filterChange=".onFilterChange" afterVariantLoad=".onAfterVariantLoad">
+							<fb:filterGroupItems>
+
+								<fb:FilterGroupItem name="CustomerID" label="CustomerID" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+                                        <m:Input width="200px" showValueHelp="true" 
+                                                            valueHelpRequest="onValueHelp"
+                                                            placeholder="Customer ID"
+                                                            id="oInput"
+                                                            value="{main>/CustomerID}"
+                                                    />
+									</fb:control>
+								</fb:FilterGroupItem>
+
+                                <fb:FilterGroupItem name="orderDate" label="날짜 조회" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+                                        <m:DateRangeSelection displayFormat="yyyy-MM-dd"
+                                                              dateValue="{main>/OrderDateFrom}"
+                                                              secondDateValue="{main>/OrderDateTo}"  
+                                                                 /> <!--사용자가 입력한 날짜가 바인딩 되어서 들어감. 그걸로 필터 거쳐서 조회 해보기-->
+                                        
+                                        
+									</fb:control>
+								</fb:FilterGroupItem>
+
+								<!-- <fb:FilterGroupItem name="Category" label="Category" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<m:MultiComboBox
+											name="Category"
+											selectionChange=".onSelectionChange"
+											items="{
+												path: '/ProductCategories',
+												templateShareable: true
+											}"
+										>
+											<core:Item key="{key}" text="{name}"/>
+										</m:MultiComboBox>
+									</fb:control>
+								</fb:FilterGroupItem>
+
+								<fb:FilterGroupItem name="SupplierName" label="SupplierName" groupName="Group1" visibleInFilterBar="true">
+									<fb:control>
+										<m:MultiComboBox
+											name="SupplierName"
+											selectionChange=".onSelectionChange"
+											items="{
+												path: '/ProductSuppliers',
+												templateShareable: true
+											}"
+										>
+											<core:Item key="{key}" text="{name}"/>
+										</m:MultiComboBox>
+									</fb:control>
+								</fb:FilterGroupItem> -->
+
+							</fb:filterGroupItems>
+						</fb:FilterBar>
+        </headerContent>
+
+        <sections>
+
+            <ObjectPageSection titleUppercase="false" title="Section 5">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+
+                            <m:Table
+                                id="idTable"
+                                inset="false"
+                                items="{
+                                path: '/Orders'
+                                }">
+
+
+                            <!-- 시작부터 조회 걸어서 필터 걸기전 테이블 단에서 필터 거는 방법.  
+                                 <m:Table
+                                id="idTable"
+                                inset="false"
+                                items="{
+                                path: '/Orders',   
+                                filters:[{
+                                    path:'CustomerID',
+                                    operator :'EQ',
+                                    value1 : 'RICSU'
+                                }], 
+                                sorter:[{
+                                    path:'EmployeeID',
+                                    descending:false
+                                       },{
+                                        path:'다른거',
+                                    descending:false
+                                       } ]
+                                }"> -->
+
+                                <m:headerToolbar>
+                                    <m:OverflowToolbar>
+                                        <m:content>
+                                            <m:Title text="Products" level="H2"/>
+                                            <m:ToolbarSpacer/>
+                                        </m:content>
+                                    </m:OverflowToolbar>
+                                </m:headerToolbar>
+
+                                <m:columns>
+                                    <m:Column >
+                                        <m:Text text="OrderID"/>
+                                    </m:Column>
+                                    <m:Column >
+                                        <m:Text text="CustomerID"/>
+                                    </m:Column>
+                                    <m:Column >
+                                        <m:Text text="EmployID"/>
+                                    </m:Column>
+                                    <m:Column >
+                                        <m:Text text="OrderDate"/>
+                                    </m:Column>
+                                    <m:Column >
+                                        <m:Text text="RequiredDate"/>
+                                    </m:Column>
+                                    <m:Column >
+                                        <m:Text text="ShippedDate"/>
+                                    </m:Column>
+                                    <m:Column >
+                                        <m:Text text="Freight Sum"/>
+                                    </m:Column>
+                                </m:columns>
+
+                                <m:items>
+                                    <m:ColumnListItem vAlign="Middle">
+
+                                        <m:cells>
+
+                                            <m:Text text="{OrderID}"/>
+                                            <m:Text text="{CustomerID}"/>
+                                            <m:Text text="{EmployeeID}"/>
+
+                                            <m:Text
+                                                text="{
+                                                path : 'OrderDate',
+                                                formatter : '.formatter.fnDateToString'
+
+                                                }"/><!-- 1개 바인딩, 컨트롤러에formatter함수 만들어서 데이터 나오는 형식 지정-->
+                                            <m:Text
+                                                text="{
+                                                path: 'RequiredDate',
+                                                formatter : '.formatter.fnDateToString'
+                                            }"/><!-- 1개 바인딩-->
+                                            <m:Text
+                                                text="{
+                                                path: 'ShippedDate',
+                                                formatter : '.formatter.fnDateToString'
+                                            }"/><!-- 1개 바인딩, -->
+                                        
+                                            <m:Text text="{
+                                                parts:[
+                                                    {path:'ShipVia'},
+                                                    {path:'Freight'}
+                                                ],
+                                                formatter : '.formatter.fnFreightSum'
+                                            }"/>  <!-- 2개 바인딩, path경로 2개 설정-->
+
+                                        </m:cells>
+
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" title="Section 4">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <!-- <m:Text text="Section 4 Page"/> -->
+                            <m:Button text="gotodetail" press="onNavDetail"></m:Button>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+        </sections>
+
+    </ObjectPageLayout>
+</mvc:View>

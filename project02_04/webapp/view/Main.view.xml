@@ -1,0 +1,90 @@
+<mvc:View
+    controllerName="project0204.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:table="sap.ui.table"
+    xmlns="sap.m">
+
+    <!--json data의 key값 기준으로 경로를 설정-->
+    <Page id="page" title="{main>/pageTitle}">
+        <!--title="{main>/name}" 바인딩 main은 컨트롤러에서 setmodel에서 정의-->
+        <content >
+
+            <VBox >
+                <Button press="onClick" text="press me!"></Button>
+                <Input
+                    id="oInput"
+                    value="{main>/name/firstName}{main>/name/lastName} 바인딩 2개한겨 "/>
+                <!--바인딩값 2개-->
+
+                <Input
+                    id="oInput2"
+                    value="{test>/inpValue/firstName}{test>/inpValue/lastName}"/>
+
+                <Text text="{main>/txtValue}"/>
+
+                <Input id="oInput3" value="{main>/aaaa}"></Input>
+                <!--aaaa라는 키값은 없음 근데 사용자 값을 받아서 보내줌-->
+                <!--위에서 사용자 값 받아서 oInput 에 텍스트 설정 한번해보기 -->
+            </VBox>
+
+            <table:Table
+                id="table1"
+                rows="{main>/list}"
+                selectionMode="MultiToggle"
+                paste="onPaste"
+                rowActionCount="1"
+                ariaLabelledBy="title">
+
+                <table:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title id="title" text="Products"/>
+                        <ToolbarSpacer ></ToolbarSpacer>
+                        <!--밑에서 만든 버튼을 타이틀과 띠워 놓으려거-->
+                        <Button type="Success" icon="sap-icon://add" text="Add" press="Add"/>
+                        <Button type="Success" icon="sap-icon://delete" text="Delete" press="Delete"/>
+                    </OverflowToolbar>
+                </table:extension>
+
+                <table:rowActionTemplate>
+                    <table:RowAction >
+                        <table:items>
+                            <table:RowActionItem icon="sap-icon://decline" press="onRowActionItem"/>
+                        </table:items>
+                    </table:RowAction>
+                </table:rowActionTemplate>
+
+                <table:columns>
+                    <table:Column >
+                        <Label text="Name"/>
+                        <table:template>
+                            <!-- <Text text="{main>name}" wrapping="false"/> -->
+                            <Input value="{main>name}"></Input>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+
+                <table:columns>
+                    <table:Column >
+                        <Label text="age"/>
+                        <table:template>
+                            <!--table컬러 바인딩은 model(main)에서 슬래시 없이 알아서 조회함-->
+                            <Text text="{main>age}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+
+                <table:columns>
+                    <table:Column >
+                        <Label text="tel"/>
+                        <table:template>
+                            <Text text="{main>tel}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+
+            </table:Table>
+
+        </content>
+    </Page>
+</mvc:View>

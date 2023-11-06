@@ -1,0 +1,23 @@
+<mvc:View controllerName="project0202.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"  
+    xmlns="sap.m"> <!-- xmlns => xml namespace 약자-->
+    <Page id="page" title="{i18n>title}" floatingFooter="true" >  <!--sap.m.page임.--> 
+        <content> 
+
+            <VBox >
+                <Button text = "눌러" type="Success" press="onClick" ></Button>
+                <Text id="oText"  text = " 생년월일을 입력해봐" ></Text>
+                <Input id="idInput" change="onChange" value="test" />
+            </VBox>
+
+        </content>
+
+        <footer>
+            <Toolbar>
+				<!-- <ToolbarSpacer/> -->
+				<Button text="test" />
+				
+			</Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

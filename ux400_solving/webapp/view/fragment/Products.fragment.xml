@@ -1,0 +1,97 @@
+<c:FragmentDefinition
+    xmlns:c='sap.ui.core'
+    xmlns:m='sap.m'
+    xmlns='sap.ui.table'>
+
+    <m:Dialog
+        id="idProduct"
+        contentWidth="40%"
+        contentHeight="50%"
+        title="Product"
+        draggable="true"
+        resizable="true">
+
+        <m:content>
+            <Table
+                rows="{/Products}"
+                selectionMode="MultiToggle"
+                paste="onPaste"
+                ariaLabelledBy="title">
+                <extension>
+                    <m:OverflowToolbar style="Clear">
+                        <m:Title text="Products"/>
+                    </m:OverflowToolbar>
+                </extension>
+
+                <columns>
+                    <Column>
+                        <m:Label text="ProductID"/>
+                        <template>
+                            <m:Text text="{ProductID}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column>
+                        <m:Label text="ProductName"/>
+                        <template>
+                            <m:Text text="{ProductName}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column>
+                        <m:Label text="SupplierID"/>
+                        <template>
+                            <m:Text text="{SupplierID}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column>
+                        <m:Label text="CategoryID"/>
+                        <template>
+                            <m:Text text="{CategoryID}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column>
+                        <m:Label text="QuantityPerUnit"/>
+                        <template>
+                            <m:Text text="{QuantityPerUnit}" wrapping="false"/>
+                        </template>
+                    </Column>
+                    <Column>
+                        <m:Label text="UnitPrice"/>
+                        <template>
+                            <m:Text text="{UnitPrice}" wrapping="false"/>
+                        </template>
+                    </Column>
+
+                    <Column>
+                        <m:Label text="Discontinued"/>
+                        <template>
+                            <m:Text text="{
+                                path:'Discontinued',
+                                formatter : '.formatter.transformDiscontinued'
+                            }" />
+                        </template>
+                    </Column>
+                    
+                    <Column width="11rem">
+                        <m:Label text="Status"/>
+                        <template>
+                            <!-- <m:Button icon ="{= ${UnitPrice} >= 15 ? 'sap-icon://thumb-up'  : 'sap-icon://thumb-down' }" /> -->
+                            <c:Icon src="{= ${UnitPrice} >= 15 ? 'sap-icon://thumb-up'  : 'sap-icon://thumb-down' }"
+                                    color="{= ${UnitPrice} >= 15 ? 'rgb(27,234,33)'  : 'rgb(234,52,27)' }"
+                            >
+                            </c:Icon>
+                        
+
+                        </template>
+                    </Column>
+
+                </columns>
+            </Table>
+        </m:content>
+
+        <m:endButton>
+            <m:Button text="close" press="onClose"/>
+        </m:endButton>
+
+    </m:Dialog>
+
+</c:FragmentDefinition>

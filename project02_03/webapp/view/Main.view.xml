@@ -1,0 +1,91 @@
+<mvc:View
+    controllerName="project0203.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table">
+
+    <Page id="page" title="{i18n>title}">
+        <content >
+
+            <Panel>
+                <FlexBox
+                    class="sapUiSmallMargin"
+                    height="100px"
+                    alignItems="Center"
+                    justifyContent="Center">
+                    <VBox >
+                        <Input id="oInput"></Input>
+
+                        <Select id="oSelect" width="100%" items="{main>/combo}">
+                            <core:Item key="{main>key}" text="{main>text}"/>
+                        </Select>
+
+                        <Input id="oInput2"></Input>
+                        <Button id="oButton" press="onClick" type="Success" width="100%" text="계산"></Button>
+                    </VBox>
+                </FlexBox>
+            </Panel>
+
+            <table:Table
+                rows="{main>/list}"
+                selectionMode="MultiToggle"
+                paste="onPaste"
+                ariaLabelledBy="title">
+
+                <table:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title id="title" text="Products"/>
+                    </OverflowToolbar>
+                </table:extension>
+
+                <table:columns>
+                    <table:Column width="11rem">
+                        <Label text="NUM1"/>
+                        <table:template>
+                            <Text text="{main>num1}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+
+                <table:columns>
+                    <table:Column width="11rem">
+                        <Label text="기호"/>
+                        <table:template>
+                            <Text text="{main>op}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+
+                <table:columns>
+                    <table:Column width="11rem">
+                        <Label text="NUM2"/>
+                        <table:template>
+                            <Text text="{main>num2}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+
+                <table:columns>
+                    <table:Column width="11rem">
+                        <Label text="계산 결과 기록"/>
+                        <table:template>
+                            <Text text="{main>result}" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+
+                    <table:Column width="11rem">
+                        <Label text="Status"/>
+                        <table:template>
+                            <Text text="{= ${main>result} >= 10 ? 'Yes' : 'No' }" wrapping="false"/>
+                        </table:template>
+                    </table:Column>
+
+                </table:columns>
+
+            </table:Table>
+
+        </content>
+    </Page>
+</mvc:View>

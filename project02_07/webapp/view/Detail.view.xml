@@ -1,0 +1,15 @@
+<mvc:View
+    controllerName="odata.project0207.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:fb="sap.ui.comp.filterbar" > 
+
+    <Page >
+        <content>
+             <Input value="aa"/>    
+        </content>
+    </Page>
+   
+</mvc:View>
