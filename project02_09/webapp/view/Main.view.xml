@@ -1,0 +1,159 @@
+<mvc:View
+    controllerName="project0209.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:con="sap.suite.ui.commons"
+    xmlns:core="sap.ui.core">
+
+    <Page id="page" title="{i18n>title}">
+
+        <con:ChartContainer
+            id="idChartContainer"
+            showFullScreen="true"
+            showPersonalization="true"
+            autoAdjustHeight="false"
+            title="Revenue">
+            <con:content>
+                <con:ChartContainerContent icon="sap-icon://line-chart" title="Line Chart">
+                    <con:content>
+
+                        <!--controller에서 만들기-->
+                        <!-- <viz:VizFrame id="idChart" vizType="column"></viz:VizFrame> -->
+                        <viz:VizFrame vizType="stacked_column">
+                            <!--dataset은 한개 까지 가능-->
+                            <viz:dataset>
+                                <viz.data:FlattenedDataset data="{main>/Products}">
+
+                                    <!--x축 데이터-->
+                                    <viz.data:dimensions>
+                                        <viz.data:DimensionDefinition name="나라" value="{Country}"/>
+                                    </viz.data:dimensions>
+
+                                    <!--y축 데이터-->
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition name="Revenue" value="{Revenue}"/>
+                                        <viz.data:MeasureDefinition name="Revenue2" value="{Revenue2}"/>
+
+                                    </viz.data:measures>
+
+                                </viz.data:FlattenedDataset>
+
+                            </viz:dataset>
+
+                            <viz:feeds>
+
+                                <!-- uid세팅 참고 line,column,bar ... => categoryAxis + valueAxis pie, donut, ... =>
+                                color + size -->
+                                <viz.feeds:FeedItem uid="categoryAxis" values="나라" type="Dimension"/>
+                                <!--X축-->
+                                <viz.feeds:FeedItem uid="valueAxis" values="Revenue" type="Measure"/>
+                                <!--Y축-->
+                                <viz.feeds:FeedItem uid="valueAxis" values="Revenue2" type="Measure"/>
+
+                            </viz:feeds>
+
+                        </viz:VizFrame>
+                    </con:content>
+
+                </con:ChartContainerContent>
+
+                <con:ChartContainerContent icon="sap-icon://table-view" title="Table">
+                    <con:content>
+                        <Table
+                                id="idTable"
+                                inset="false"
+                                items="{main>/Products}"
+                                mode = "SingleSelectMaster"
+                                selectionChange="onSelectDetail"
+                                >
+
+
+                                <headerToolbar>
+                                    <OverflowToolbar>
+                                        <content>
+                                            <Title text="Products" level="H2"/>
+                                            <ToolbarSpacer/>
+                                        </content>
+                                    </OverflowToolbar>
+                                </headerToolbar>
+
+                                <columns>
+                                    <Column >
+                                        <Text text="Country"/>
+                                    </Column>
+                                    <Column >
+                                        <Text text="Profit"/>
+                                    </Column>
+                                    <Column >
+                                        <Text text="Forcast"/>
+                                    </Column>
+                                    <Column >
+                                        <Text text="Target"/>
+                                    </Column>
+                                    <Column >
+                                        <Text text="Revenue"/>
+                                    </Column>
+                                    <Column >
+                                        <Text text="Revenue2"/>
+                                    </Column>
+                                    <Column >
+                                        <Text text="Revenue3"/>
+                                    </Column>
+                                </columns>
+
+                                <items>
+                                    <ColumnListItem vAlign="Middle">
+                                        <cells>
+                                            <Text text="{main>Country}"/>
+                                            <Text text="{main>Profit}"/>
+                                            <Text text="{main>Forcast}"/>
+                                            <Text text="{main>Target}"/>
+                                            <Text text="{main>Revenue}"/>
+                                            <Text text="{main>Revenue2}"/>
+                                            <Text text="{main>Revenue3}"/>
+                                        </cells>
+
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                    </con:content>
+                </con:ChartContainerContent>
+
+            </con:content>
+
+            <con:customIcons>
+                <core:Icon
+                    id="customIcon"
+                    src="sap-icon://print"
+                    tooltip="Custom Content Print"
+                    press="onCustomActionPress"></core:Icon>
+            </con:customIcons>
+            <con:toolbar>
+                <OverflowToolbar id="appToolbar">
+                    <Button
+                        id="btnAction1"
+                        text="CustomAction"
+                        type="Transparent"
+                        press="onCustomActionPress"></Button>
+                    <ToolbarSpacer/>
+                    <Button
+                        id="btnAction2"
+                        text="CustomAction"
+                        type="Transparent"
+                        press="onCustomActionPress"></Button>
+                    <con:ChartContainerToolbarPlaceholder></con:ChartContainerToolbarPlaceholder>
+                </OverflowToolbar>
+            </con:toolbar>
+            <con:dimensionSelectors>
+                <Select id="idSelector">
+                    <core:Item key="0" text="Sales by Country"/>
+                </Select>
+            </con:dimensionSelectors>
+        </con:ChartContainer>
+
+    </Page>
+</mvc:View>
