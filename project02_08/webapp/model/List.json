@@ -1,0 +1,10 @@
+{
+    "list" : [
+        {"name":"aaa", "rate":35, "cost":10},
+        {"name":"bbb", "rate":10, "cost":12},
+        {"name":"ccc", "rate":15, "cost":13},
+        {"name":"ddd", "rate":3, "cost":14},
+        {"name":"eee", "rate":25, "cost":15},
+        {"name":"fff", "rate":5, "cost":17}
+    ]
+}

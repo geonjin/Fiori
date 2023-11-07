@@ -1,0 +1,10 @@
+{
+    "sales" : [
+        {"product" : "Jacket", "amount": "65"},
+        {"product" : "Shirt", "amount": "25"},
+        {"product" : "Socks", "amoun": "35"},
+        {"product" : "Hat", "amount": "45"},
+        {"product" : "Purse", "amount": "11"}
+        
+    ]
+}

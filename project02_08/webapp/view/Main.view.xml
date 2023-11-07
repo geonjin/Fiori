@@ -8,6 +8,62 @@
     <Page id="page" title="{i18n>title}">
         <content >
 
+        <viz:VizFrame vizType="stacked_column" legendVisible="true" 
+        vizProperties="{
+            'title' :{
+                'visible':true,
+                'text' : 'stacked_column'
+            },
+            'legendGroup' : {
+                'layout' : {'position' : 'left'}
+            },
+            'plotArea' : {
+                'drawingEffect':'glossy',
+                'dataLabel' : { visible:true, type:'value'},
+                'colorPalette': ['#6799FF','#86E57F']
+            }
+        }" >
+                <!--dataset은 한개 까지 가능-->
+                <viz:dataset> 
+                    <viz.data:FlattenedDataset data="{view>/list}">
+                    
+                        <!--x축 데이터-->
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="이름" value="{name}"/>
+                        </viz.data:dimensions>
+
+                        <!--y축 데이터-->
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="숫자" value="{rate}" />
+                            <viz.data:MeasureDefinition name="비용" value="{cost}"/>
+
+                        </viz.data:measures>
+
+                    </viz.data:FlattenedDataset>
+
+                </viz:dataset>
+
+                <viz:feeds>
+                    
+                    <!--
+                        uid세팅 참고
+                        line,column,bar ... => categoryAxis + valueAxis
+                        pie, donut, ... => color + size
+                        
+                    -->
+                    <viz.feeds:FeedItem  uid="categoryAxis" values="이름" type="Dimension"  /><!--X축-->
+                    <viz.feeds:FeedItem  uid="valueAxis" values="숫자" type="Measure" /><!--Y축-->
+                    <viz.feeds:FeedItem  uid="valueAxis" values="비용" type="Measure" /><!--Y축-->
+
+                </viz:feeds>
+
+            </viz:VizFrame>
+
+            
+            <!--controller에서 만들기-->
+            <viz:VizFrame id="idChart" vizType="column"></viz:VizFrame>
+
+
             <viz:VizFrame vizType="pie" >
                 <!--dataset은 한개 까지 가능-->
                 <viz:dataset> 
@@ -45,8 +101,14 @@
 
             </viz:VizFrame>
 
-                        <viz:VizFrame vizType="line" >
-                <!--dataset은 한개 까지 가능-->
+                        <viz:VizFrame vizType="combination"
+                                      vizProperties="{
+                                        'title':{
+                                            'visible':true,
+                                            'text':'my first chart'
+                                        }
+                                      }">
+                    <!--dataset은 한개 까지 가능-->
                 <viz:dataset> 
                     <viz.data:FlattenedDataset data="{view>/list}">
                     
