@@ -53,40 +53,9 @@
                                                               dateValue="{main>/OrderDateFrom}"
                                                               secondDateValue="{main>/OrderDateTo}"  
                                                                  /> <!--사용자가 입력한 날짜가 바인딩 되어서 들어감. 그걸로 필터 거쳐서 조회 해보기-->
-                                        
-                                        
+                                                                                
 									</fb:control>
 								</fb:FilterGroupItem>
-
-								<!-- <fb:FilterGroupItem name="Category" label="Category" groupName="Group1" visibleInFilterBar="true">
-									<fb:control>
-										<m:MultiComboBox
-											name="Category"
-											selectionChange=".onSelectionChange"
-											items="{
-												path: '/ProductCategories',
-												templateShareable: true
-											}"
-										>
-											<core:Item key="{key}" text="{name}"/>
-										</m:MultiComboBox>
-									</fb:control>
-								</fb:FilterGroupItem>
-
-								<fb:FilterGroupItem name="SupplierName" label="SupplierName" groupName="Group1" visibleInFilterBar="true">
-									<fb:control>
-										<m:MultiComboBox
-											name="SupplierName"
-											selectionChange=".onSelectionChange"
-											items="{
-												path: '/ProductSuppliers',
-												templateShareable: true
-											}"onSearch
-										>
-											<core:Item key="{key}" text="{name}"/>
-										</m:MultiComboBox>
-									</fb:control>
-								</fb:FilterGroupItem> -->
 
 							</fb:filterGroupItems>
 						</fb:FilterBar>

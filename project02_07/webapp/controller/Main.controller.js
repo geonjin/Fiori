@@ -12,9 +12,7 @@ sap.ui.define([
 
                 var oModel = new sap.ui.model.json.JSONModel({CustomerID: ''});
 
-                this
-                    .getView()
-                    .setModel(oModel, "main");
+                this.getView().setModel(oModel, "main");
             },
 
             formatter: {
