@@ -46,13 +46,10 @@ sap.ui.define([
                 // debugger; var oCustomor = sap.ui.getCore().byId("idCustomor"); var oModel =
                 // this.getView().getModel();  fragment 파일에서 불러오려면 따로 model을 만들어야함 뷰에 fragment파일
                 // 안만들고 바로 붙이면 byid로 부르면 되는데 프레그먼트 만들었으니
-                var oCustomor = this
-                    .getView()
-                    .byId("idCustomor"); // view에다가 입혀서 바로 id로 불러올수 있음
+                var oCustomor = this.getView().byId("idCustomor"); // view에다가 입혀서 바로 id로 불러올수 있음
 
                 if (!oCustomor) {
-                    Fragment
-                        .load({
+                    Fragment.load({
                             name: 'odata.project0207.view.fragment.Customor', type: 'XML', controller: this // 소문자로 하고 다이얼로그 박스에 버튼 만들었는데 컨트롤러가 없으니까 여기에 지정하기 위함
                         })
                         .then(function (oCustomor) {
@@ -95,7 +92,7 @@ sap.ui.define([
                     aFilter.push(oFilter); // Odata.customerid가 있을때만 push하라고.
                 }
                 
-                if (oData.OrderDateFrom) {
+                if (oData.OrderDateFrom && oData.OrderDateTo) {
 
                     // new Filter({}) , 즉 새로운 필터 객체 만드는것
                     var oFilter = new Filter({
@@ -132,6 +129,7 @@ sap.ui.define([
                 // var aa = obj2
                 // alert(obj2.CustomerID);
                 
+                //내가 화면에서 버튼을 클릭하지 않아도.
                 // 다이얼로그페이지에 close버튼에 press이벤트를 여기서 태우는것 그러면 테이블 행 더블클릭하면 onClose()함수 타서 닫아짐.
                 this.getView().byId("idCustClose").fireEvent('press');
 
@@ -144,6 +142,7 @@ sap.ui.define([
 
             //page 4 - 라우터 실행 버튼 이벤트
             onNavDetail(){
+                
                 var oRouter = this.getOwnerComponent().getRouter();
                 oRouter.navTo("RouteDetail",{  // navTo로 이동하기 전에 라우터 객체가 필요함. 
                      OrderID:"HI", // 필수 파라미터 -> 파라미터 정보

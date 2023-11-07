@@ -6,11 +6,21 @@
     xmlns:core="sap.ui.core"
     xmlns:fb="sap.ui.comp.filterbar" > 
 
-    <Page id="detail" title="" showNavButton="true"
-		navButtonPress="onBack" >
+    <Page id="detail" title="" showNavButton="true" navButtonPress="onBack" >
+
         <content>
              <Input id="oInput" value="aa"/>    
              <Button press="goMain" text="뒤로가아아아아아"></Button>
+
+             <VBox >
+                <Text text="{OrderID}" ></Text>
+                <Text text="{CustomerID}"></Text>
+                <Text text="{EmployeeID}"></Text>
+                <Text text="{ShipName}"></Text>
+                <Text text="{ShipCity}"></Text>
+                <Text text="{ShipCoutry}"></Text>
+                <Button text="전체 조회" press="onRead"></Button>
+             </VBox>
         </content>
     </Page>
    
