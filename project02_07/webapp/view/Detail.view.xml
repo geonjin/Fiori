@@ -6,9 +6,11 @@
     xmlns:core="sap.ui.core"
     xmlns:fb="sap.ui.comp.filterbar" > 
 
-    <Page >
+    <Page id="detail" title="" showNavButton="true"
+		navButtonPress="onBack" >
         <content>
-             <Input value="aa"/>    
+             <Input id="oInput" value="aa"/>    
+             <Button press="goMain" text="뒤로가아아아아아"></Button>
         </content>
     </Page>
    

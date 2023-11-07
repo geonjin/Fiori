@@ -123,7 +123,7 @@ sap.ui.define([
 
                 //선택 행 정보 뽑아오기.
                 // var spath = oEvent.getParameters().rowContext.getPath();
-                // var obj = oEvent.getView().getMolel().getProperty(spath);
+                // var obj = this.getView().getModel().getProperty(spath);
 
 
                 //선택한 row값을 한번에 가져오는것.
@@ -146,10 +146,30 @@ sap.ui.define([
             onNavDetail(){
                 var oRouter = this.getOwnerComponent().getRouter();
                 oRouter.navTo("RouteDetail",{  // navTo로 이동하기 전에 라우터 객체가 필요함. 
-                     OrderID:"HI", // 필수 파라미터
+                     OrderID:"HI", // 필수 파라미터 -> 파라미터 정보
                      option: 123 // 선택 파라미터
 
                     })
+            },
+            onSelectDetail(oEvent){
+                // debugger;
+                //경로얻기
+                var spath = oEvent.getParameters().listItem.getBindingContextPath();
+                //경로아는 상태에서 필드 하나 잡아서 getProperty해서 가져오기.
+                var obj = this.getView().getModel().getProperty(spath).OrderID;
+                var obj2 = this.getView().getModel().getProperty(spath).CustomerID;
+
+
+                //다른 화면으로 넘기기 로직.
+                var oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo("RouteDetail",{  // navTo로 이동하기 전에 라우터 객체가 필요함. 
+                     OrderID: obj, // 필수 파라미터 -> 파라미터 정보
+                     option: obj2  // 선택 파라미터
+                    })
+                
+
+               
+              
             }
         });
     });

@@ -81,7 +81,7 @@
 											items="{
 												path: '/ProductSuppliers',
 												templateShareable: true
-											}"
+											}"onSearch
 										>
 											<core:Item key="{key}" text="{name}"/>
 										</m:MultiComboBox>
@@ -104,7 +104,11 @@
                                 inset="false"
                                 items="{
                                 path: '/Orders'
-                                }">
+                                }"
+                                mode = "SingleSelectMaster"
+                                selectionChange="onSelectDetail"
+                                ><!--mode = "SingleSelectMaster"
+                                selectionChange="onSelectDetail"  하나 선택해서 onselectdetail 함수타기-->
 
 
                             <!-- 시작부터 조회 걸어서 필터 걸기전 테이블 단에서 필터 거는 방법.  
