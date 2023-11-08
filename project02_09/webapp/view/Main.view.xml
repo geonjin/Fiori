@@ -1,4 +1,4 @@
-<mvc:View
+<mvc:View xmlns:microchart="sap.suite.ui.microchart"
     controllerName="project0209.controller.Main"
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
@@ -7,7 +7,8 @@
     xmlns:viz.data="sap.viz.ui5.data"
     xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
     xmlns:con="sap.suite.ui.commons"
-    xmlns:core="sap.ui.core">
+    xmlns:core="sap.ui.core"
+    xmlns:mic="sap.suite.ui.microchart">
 
     <Page id="page" title="{i18n>title}">
 
@@ -71,7 +72,6 @@
                                 selectionChange="onSelectDetail"
                                 >
 
-
                                 <headerToolbar>
                                     <OverflowToolbar>
                                         <content>
@@ -103,6 +103,9 @@
                                     <Column >
                                         <Text text="Revenue3"/>
                                     </Column>
+                                    <Column >
+                                        <Text text="micro chart"/>
+                                    </Column>
                                 </columns>
 
                                 <items>
@@ -115,6 +118,17 @@
                                             <Text text="{main>Revenue}"/>
                                             <Text text="{main>Revenue2}"/>
                                             <Text text="{main>Revenue3}"/>
+                                            <mic:RadialMicroChart size="M" 
+                                            percentage="{= (${main>Revenue} + ${main>Revenue2} + ${main>Revenue3}) / 100}" 
+                                            valueColor="{}"
+                                            />
+
+                                    <!-- <microchart:ComparisonMicroChart data="{main>/Products}" >
+                                        <microchart:ComparisonMicroChartData value = "{main>Revenue3}">
+                                        
+                                        </microchart:ComparisonMicroChartData>
+                                    </microchart:ComparisonMicroChart> -->
+
                                         </cells>
 
                                     </ColumnListItem>
