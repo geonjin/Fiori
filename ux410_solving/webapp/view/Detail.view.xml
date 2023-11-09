@@ -1,0 +1,121 @@
+<mvc:View
+    controllerName="sap.btp.ux410solving.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:l="sap.ui.layout.form"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:fb="sap.ui.comp.filterbar">
+
+    <f:DynamicPage
+        id="dynamicPageId"
+        headerExpanded="{/headerExpanded}"
+        toggleHeaderOnTitleClick="{/titleClickable}">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title id="idTitle" text=""/>
+                </f:heading>
+
+
+                <f:navigationActions>
+                    <Button icon="sap-icon://full-screen" type="Transparent"/>
+                    <Button icon="sap-icon://decline" type="Transparent"/>
+                </f:navigationActions>
+
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader>
+                
+            
+
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search=".onSearch"
+                        filterChange=".onFilterChange"
+                        afterVariantLoad=".onAfterVariantLoad">
+                        <fb:filterGroupItems>
+
+                            <fb:FilterGroupItem
+                                name="Name"
+                                label="OrderID"
+                                groupName="Group1"
+                                visibleInFilterBar="true">
+                                <fb:control>
+                                   
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+           <VBox class="sapUiSmallMargin">
+		<l:SimpleForm id="SimpleFormDisplay354"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Address"
+			labelSpanXL="3"
+			labelSpanL="3"
+			labelSpanM="3"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="4"
+			emptySpanL="4"
+			emptySpanM="4"
+			emptySpanS="0"
+			columnsXL="1"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<l:content>
+				<Label text="OrderID" />
+				<Text id="nameText" text="{main>/OrderID}" />
+
+				<Label text="ProductID" />
+				<Text text="{main>/ProductID}" />
+
+				<Label text="UnitPrice" />
+				<Text text="{main>/UnitPrice}" />
+
+				<Label text="Quantity" />
+				<Text text="{main>/Quantity}" />
+
+				<Label text="Discount" />
+				<Text text="{main>/Discount}" />
+
+			</l:content>
+		</l:SimpleForm>
+	</VBox>
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+                <Button
+                    icon="sap-icon://message-popup"
+                    text="{/messagesLength}"
+                    type="Emphasized"
+                    press="onMessageButtonPress"
+                    visible="{= !!${/messagesLength}}"/>
+                <ToolbarSpacer/>
+                <Button type="Accept" text="Accept"/>
+                <Button type="Reject" text="Reject"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+
+</mvc:View>

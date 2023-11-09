@@ -1,0 +1,167 @@
+<mvc:View
+    controllerName="sap.btp.ux410solving.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:fb="sap.ui.comp.filterbar">
+
+    <f:DynamicPage
+        id="dynamicPageId"
+        headerExpanded="{/headerExpanded}"
+        toggleHeaderOnTitleClick="{/titleClickable}">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="VizFrame"/>
+                </f:heading>
+
+                <f:navigationActions>
+                    <Button icon="sap-icon://full-screen" type="Transparent"/>
+                    <Button icon="sap-icon://decline" type="Transparent"/>
+                </f:navigationActions>
+
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader>
+
+                <f:content>
+                    <fb:FilterBar
+                        id="filterbar"
+                        persistencyKey="myPersKey"
+                        useToolbar="false"
+                        search=".onSearch"
+                        filterChange=".onFilterChange"
+                        afterVariantLoad=".onAfterVariantLoad">
+                        <fb:filterGroupItems>
+
+                            <fb:FilterGroupItem
+                                name="Name"
+                                label="OrderID"
+                                groupName="Group1"
+                                visibleInFilterBar="true">
+                                <fb:control>
+                                    <!--콤보 박스-->
+                                    <ComboBox
+                                        id="idCombo"
+                                        showSecondaryValues="true"
+                                        items="{
+                                            path: '/Orders'
+                                        }">
+                                        <core:ListItem key="{OrderID}" text="{OrderID}" additionalText="{CustomerID}"/>
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem
+                                name="Name2"
+                                label="Type"
+                                groupName="Group1"
+                                visibleInFilterBar="true">
+                                <fb:control>
+                                    <!--콤보 박스-->
+                                    <ComboBox
+                                        id="idType"
+                                        showSecondaryValues="true"
+                                        items="{
+                                            path: 'main>/combo' ,
+                                            templateShareable:true
+                                        }"
+                                        required="true"
+                                        value="bar">
+                                        <core:ListItem key="{main>type}" text="{main>type}"/>
+
+                                    </ComboBox>
+                                </fb:control>
+                            </fb:FilterGroupItem>
+
+                        </fb:filterGroupItems>
+                    </fb:FilterBar>
+                </f:content>
+
+            </f:DynamicPageHeader>
+        </f:header>
+<!-- vizType="bar" -->
+<!-- vizProperties="{
+            'title' :{
+                'visible':true,
+                'text' : 'bar'
+            },
+            'legendGroup' : {
+                'layout' : {'position' : 'left'}
+            },
+            'plotArea' : {
+                'drawingEffect':'glossy',
+                'dataLabel' : { visible:true, type:'value'},
+                'dataset' : 'small'
+
+            }
+        }" -->
+
+        <!--uiConfig="{applicationSet:'fiori'}" -> 써야 나옴-->
+        <f:content>
+            <viz:VizFrame
+                vizType="bar"
+                id="idVizFrame"
+                uiConfig="{applicationSet:'fiori'}"
+            
+                selectData="onSelect"
+                
+        > <!--차트를 선택했을때 타는 이벤트 selectData/ type는 처음에 bar로 설정해도 컨트롤러에서 setviztype쓰면 바뀜-->
+
+                <!--dataset은 한개 까지 가능-->
+                <viz:dataset>
+                    <viz.data:FlattenedDataset id="idFlattend" data="{/Order_Details}">
+
+                        <!--x축 데이터-->
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="value" value="{OrderID}"/>
+                            <viz.data:DimensionDefinition name="value1" value="{ProductID}"/>
+                        </viz.data:dimensions>
+
+                        <!--y축 데이터-->
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="숫자" value="{UnitPrice}"/>
+                        </viz.data:measures>
+
+                    </viz.data:FlattenedDataset>
+
+                </viz:dataset>
+
+                <viz:feeds>
+
+                    <!-- uid세팅 참고 line,column,bar ... => categoryAxis + valueAxis pie, donut, ... =>
+                    color + size -->
+                    <viz.feeds:FeedItem uid="categoryAxis" values="value,value1" type="Dimension"/>
+                    <!-- <viz.feeds:FeedItem uid="categoryAxis" values="value1" type="Dimension"/> -->
+                    <viz.feeds:FeedItem uid="valueAxis" values="숫자" type="Measure"/>
+
+                </viz:feeds>
+
+            </viz:VizFrame>
+
+        </f:content>
+        <!-- DynamicPage Footer -->
+        <f:footer>
+            <OverflowToolbar>
+                <Button
+                    icon="sap-icon://message-popup"
+                    text="{/messagesLength}"
+                    type="Emphasized"
+                    press="onMessageButtonPress"
+                    visible="{= !!${/messagesLength}}"/>
+                <ToolbarSpacer/>
+                <Button type="Accept" text="Accept"/>
+                <Button type="Reject" text="Reject"/>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+
+</mvc:View>
