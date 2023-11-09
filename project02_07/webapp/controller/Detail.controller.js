@@ -32,8 +32,9 @@ function (Controller,History,Filter) {
             //detail뷰에 text4개 바인딩 정보 넘기기
             //orderid기준으로 /orders에 정보 그 json객체 안에 정보를 가져오는 것.
             this.getView().bindElement(`/Orders(${oArgu.OrderID})`);
+            debugger;
+            // path = oArgu.OrderID;
 
-            path = oArgu.OrderID;
         },
         goMain(){
             var oRouter = this.getOwnerComponent().getRouter();
