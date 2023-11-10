@@ -24,7 +24,7 @@ function (Controller,History,Filter,JSONModel) {
         },
         //detail 페이지 실행 될때마다 실행,라우터 패턴이 "일치할때마다"실행
         _patternMatched(oEvent){
-
+            debugger;
             //메인에서 넘긴 productID, OrderID 즉 url파라미터 정보를 가져오기.
             var oArgu = oEvent.getParameters().arguments;
             

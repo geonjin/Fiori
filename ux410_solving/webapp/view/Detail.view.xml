@@ -11,6 +11,7 @@
     xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
     xmlns:fb="sap.ui.comp.filterbar">
 
+
     <f:DynamicPage
         id="dynamicPageId"
         headerExpanded="{/headerExpanded}"
