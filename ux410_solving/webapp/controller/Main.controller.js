@@ -57,7 +57,7 @@ sap.ui.define([
                 }
                 //getBinding 중요 --------
                 this.byId("idFlattend").getBinding("data").filter(aFilter); // table에 필터를 걸기 위해서 테이블 id가져오고 거기서 items에 바인딩 걸어놨으니까
-                // items 넣어줌
+                // items 넣어줌ㅇㄹ
             },
             onSelect(oEvent){
                 // debugger;
