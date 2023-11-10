@@ -1,0 +1,123 @@
+<mvc:View controllerName="odatacrud.controller.main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f" 
+    xmlns:layout="sap.ui.layout"
+	xmlns:t="sap.ui.table">
+
+
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<Title text="Header Title"/>
+					</f:heading>
+					
+					<f:actions>
+						<Button
+								text="Read EntitySet"
+								type="Emphasized"
+								press="onReadEntitySet"/>
+						<Button
+								text="Read Entity"
+								type="Emphasized"
+								press="onReadEntity"/>
+						<Button
+								text="Create"
+								type="Emphasized"
+								press="onCreate"/>
+						<Button
+								text="Update"
+								type="Emphasized"
+								press="onUpdate"/>
+						<Button
+								text="Delete"
+								type="Emphasized"
+								press="onDelete"/>
+
+						
+					</f:actions>
+
+				</f:DynamicPageTitle>
+			</f:title>
+			<!-- DynamicPage Header -->
+			<f:header>
+				<f:DynamicPageHeader pinnable="true">
+					<layout:HorizontalLayout allowWrapping="true">
+						
+
+						<layout:VerticalLayout class="sapUiSmallMarginEnd">
+							<ObjectAttribute title="Memid"/>
+							<Input value="{main>/Memid}"/>
+						</layout:VerticalLayout>
+						<layout:VerticalLayout class="sapUiSmallMarginEnd">
+							<ObjectAttribute title="Memnm"/>
+							<Input value="{main>/Memnm}" />
+						</layout:VerticalLayout>
+						<layout:VerticalLayout class="sapUiSmallMarginEnd">
+							<ObjectAttribute title="Telno"/>
+							<Input value="{main>/Telno}" />
+						</layout:VerticalLayout>
+						<layout:VerticalLayout class="sapUiSmallMarginEnd">
+							<ObjectAttribute title="Email"/>
+							<Input value="{main>/Email}" />
+						</layout:VerticalLayout>
+
+					</layout:HorizontalLayout>
+				</f:DynamicPageHeader>
+			</f:header>
+
+			<f:content>				
+				<t:Table
+				id="idTable"
+				rows="{/MemberSet}"
+				selectionMode="Single"
+				selectionBehavior="RowOnly"
+				paste="onPaste"
+				ariaLabelledBy="title"
+				rowSelectionChange="onChange">
+				<t:extension>
+					<OverflowToolbar style="Clear">
+						<Title id="title" text="Products"/>
+					</OverflowToolbar>
+				</t:extension>
+
+				<t:columns>
+					<t:Column width="auto">
+						<Label text="Memid" />
+						<t:template>
+							<Text text="{Memid}" wrapping="false" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+				<t:columns>
+					<t:Column width="auto">
+						<Label text="Memnm" />
+						<t:template>
+							<Text text="{Memnm}" wrapping="false" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+				<t:columns>
+					<t:Column width="auto">
+						<Label text="Telno" />
+						<t:template>
+							<Text text="{Telno}" wrapping="false" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+				<t:columns>
+					<t:Column width="auto">
+						<Label text="Email" />
+						<t:template>
+							<Text text="{Email}" wrapping="false" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+			</f:content>
+			
+			
+		</f:DynamicPage>
+</mvc:View>
