@@ -1,0 +1,127 @@
+<mvc:View
+    displayBlock="true"
+    controllerName="z03sepp01.controller.Detail"
+    height="100%"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data">
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        isChildPage="true"
+        upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title id="headerKey" text="" wrapping="true" class="sapUiSmallMarginEnd"/>
+                </expandedHeading>
+
+                <snappedHeading>
+                    <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+                        <m:FlexBox
+                            wrap="NoWrap"
+                            fitContainer="true"
+                            alignItems="Center"
+                            class="sapUiTinyMarginEnd">
+                            <m:Title text="{products>Name}" wrapping="true" class="sapUiTinyMarginEnd"/>
+                        </m:FlexBox>
+                    </m:FlexBox>
+                </snappedHeading>
+
+                <navigationActions>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://full-screen"
+                        press="handleFullScreen"
+                        id="enterFullScreenBtn"
+                        tooltip="Enter Full Screen Mode"
+                        visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://exit-full-screen"
+                        press="handleExitFullScreen"
+                        id="exitFullScreenBtn"
+                        tooltip="Exit Full Screen Mode"
+                        visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://decline"
+                        press="handleClose"
+                        tooltip="Close middle column"
+                        visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+                </navigationActions>
+
+                <actions>
+                    <m:Button text="Go DetailDetail" type="Emphasized" press="onGoDetailDetail"/>
+                </actions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <m:Text text="headerContent Area"></m:Text>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection title="검수 완료 품목">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+
+                         <viz:VizFrame vizType="stacked_bar"
+                         uiConfig="{applicationSet:'fiori'}"
+                         width="auto">
+                            <!--dataset은 한개 까지 가능-->
+                            <viz:dataset>
+                                <viz.data:FlattenedDataset data="{Detail>/list}">
+                                    <!--x축 데이터-->
+                                    <viz.data:dimensions>
+                                        <viz.data:DimensionDefinition name="생산번호" value="{PRO_NUM}"/>
+                                    </viz.data:dimensions>
+                                    <!--y축 데이터-->
+                                    <viz.data:measures>
+                                        <viz.data:MeasureDefinition name="품질A" value="{A_INVENT}"/>
+                                        <viz.data:MeasureDefinition name="품질B" value="{B_INVENT}"/>
+                                    </viz.data:measures>
+                                </viz.data:FlattenedDataset>
+                            </viz:dataset>
+
+                            <viz:feeds>
+
+                                <!-- uid세팅 참고 line,column,bar ... => categoryAxis + valueAxis pie, donut, ... =>
+                                color + size -->
+                                <viz.feeds:FeedItem uid="categoryAxis" values="생산번호" type="Dimension"/>
+                                <viz.feeds:FeedItem uid="valueAxis" values="품질A" type="Measure"/>
+                                <!--X축-->
+                                <viz.feeds:FeedItem uid="valueAxis" values="품질B" type="Measure"/>
+                                <!--Y축-->
+                                <!-- <viz.feeds:FeedItem uid="valueAxis" values="B품질" type="Measure"/> -->
+
+                            </viz:feeds>
+
+                        </viz:VizFrame>
+
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection title="폐기 조회">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <m:Text text="두번째 섹션 area"></m:Text>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

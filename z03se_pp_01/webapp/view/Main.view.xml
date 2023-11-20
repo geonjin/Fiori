@@ -1,0 +1,113 @@
+<mvc:View controllerName="z03sepp01.controller.Main"
+xmlns:fb="sap.ui.comp.filterbar" 
+xmlns:mvc="sap.ui.core.mvc" 
+xmlns="sap.m" 
+xmlns:f="sap.f" 
+xmlns:core="sap.ui.core">
+    <f:DynamicPage toggleHeaderOnTitleClick="false">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Main View" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader>
+            <fb:FilterBar useToolbar="false" search="onSearch" id="filterBar" showRestoreOnFB="true"  filterContainerWidth="10rem">
+                    <fb:filterGroupItems>
+                    
+                        <fb:FilterGroupItem groupName="G1" name="OrderID" label="Order ID" visibleInFilterBar="true">
+                            <fb:control>
+                                <Input fieldGroupIds="search" name="OrderID" value="" submit="onSearch" />
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                        
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <VBox fitContainer="true">
+            
+                <Table id="productTable" inset="false" items="{
+                    path : '/Z03SE_PPT_ORDSet'
+                    }" 
+                    class="sapFDynamicPageAlignContent" width="auto"
+                    >
+
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <content>
+                                <Title text="Table Title" level="H2"/>
+                                <ToolbarSpacer />
+                                <Button text="New Page" press="onGoNewPage"/>
+                            </content>
+                        </OverflowToolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column minScreenWidth="Phone">
+                            <Text text="생산 오더 번호" />
+                        </Column>
+                        <Column minScreenWidth="Phone">
+                            <Text text="자재코드" />
+                        </Column>
+                        <Column minScreenWidth="Tablet">
+                            <Text text="생산 진행 상태" />
+                        </Column>
+                        <Column minScreenWidth="Tablet" >
+                            <Text text="생산 요청 일자" />
+                        </Column>
+                        <Column minScreenWidth="Tablet">
+                            <Text text="생산 완료 일자" />
+                        </Column>
+                        <Column minScreenWidth="Tablet">
+                            <Text text="생산 수량" />
+                        </Column>
+                        <Column minScreenWidth="Tablet">
+                            <Text text="Unit" />
+                        </Column>
+                        <Column minScreenWidth="Tablet">
+                            <Text text="직원명" />
+                        </Column>
+                      
+                    </columns>
+                    <items>
+                        <ColumnListItem type="Navigation" press=".onListItemPress">
+                            <cells>
+                                <ObjectIdentifier title="{ORD_NUM}" />
+                                <ObjectIdentifier title="{MT_COD}" />
+                                <Text text="{ORD_ST}" />
+                                <!-- <Text text="{REQ_DT}" /> -->
+                                <Text text="{
+                                    path:'REQ_DT',
+                                    type:'sap.ui.model.type.Date',
+                                    formatOptions:{
+                                        pattern : 'yyyy/MM/dd'
+                                    }
+                                }" />
+                                <Text text="{
+                                    path:'COMP_DT',
+                                    type:'sap.ui.model.type.Date',
+                                    formatOptions:{
+                                        pattern : 'yyyy/MM/dd'
+                                    }
+                                }" />
+                                <!-- <Text text="{COMP_DT}" /> -->
+                                <Text text="{OUTTRN}" />
+                                <Text text="{QUANUNIT}" />
+                                <Text text="{MANAGER}" />
+                                <!-- <core:Icon 
+                                src="sap-icon://message-success"
+                                color="{= (${UnitsOnOrder} + ${UnitsInStock}) > 100 ? '#2F9D27' : '#000000'}" 
+                                visible="{= (${UnitsOnOrder} + ${UnitsInStock}) > 100 }"/> -->
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
