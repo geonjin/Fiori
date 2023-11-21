@@ -18,7 +18,7 @@
 			
 			class="sapUiSmallMarginTopBottom" change="onValueChange" ></Input>
                 <Button text="Random" press="onRandomPress"></Button>
-
+        
                 <t:Table
                     rows="{main>/list}"
                     selectionMode="MultiToggle"
