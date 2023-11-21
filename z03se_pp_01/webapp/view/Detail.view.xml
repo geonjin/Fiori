@@ -75,9 +75,19 @@
                     <ObjectPageSubSection>
                         <blocks>
 
-                         <viz:VizFrame vizType="stacked_bar"
+                         <viz:VizFrame 
+                         id="idQual"
+                         vizType="stacked_bar"
                          uiConfig="{applicationSet:'fiori'}"
-                         width="auto">
+                         width="auto"
+                         vizProperties="{
+                            title : {
+                                text : '에스팜',
+                                visible : true
+                            }
+                         }"
+                         
+                         >
                             <!--dataset은 한개 까지 가능-->
                             <viz:dataset>
                                 <viz.data:FlattenedDataset data="{Detail>/list}">
@@ -113,11 +123,53 @@
                 </subSections>
             </ObjectPageSection>
 
-            <ObjectPageSection title="폐기 조회">
+            <ObjectPageSection title="유통기간 조회">
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
-                            <m:Text text="두번째 섹션 area"></m:Text>
+                            <viz:VizFrame 
+                         id="idExdt"
+                         vizType="line"
+                         uiConfig="{applicationSet:'fiori'}"
+                         width="auto"
+                         vizProperties="{
+                            title : {
+                                text : '에스팜',
+                                visible : true
+                            }
+                         }"
+                         
+                         >
+                            <!--dataset은 한개 까지 가능-->
+                            <viz:dataset>
+                                <viz.data:FlattenedDataset data="{Detail>/list}">
+                                    <!--x축 데이터-->
+                                    <viz.data:dimensions>
+                                        <viz.data:DimensionDefinition name="생산번호" value="{PRO_NUM}"/>
+                                    </viz.data:dimensions>
+                                    <!--y축 데이터-->
+                                    <viz.data:measures>
+                               
+                                        <viz.data:MeasureDefinition name="유통기간" value="{DDAY}"/>
+                                        <!-- <viz.data:MeasureDefinition name="품질B" value="{B_INVENT}"/> -->
+                                    </viz.data:measures>
+                                </viz.data:FlattenedDataset>
+                            </viz:dataset>
+
+                            <viz:feeds>
+
+                                <!-- uid세팅 참고 line,column,bar ... => categoryAxis + valueAxis pie, donut, ... =>
+                                color + size -->
+                                <viz.feeds:FeedItem uid="categoryAxis" values="생산번호" type="Dimension"/>
+                                <viz.feeds:FeedItem uid="valueAxis" values="유통기간" type="Measure"/>
+                                <!--X축-->
+                                <!-- <viz.feeds:FeedItem uid="valueAxis" values="품질B" type="Measure"/> -->
+                                <!--Y축-->
+                                <!-- <viz.feeds:FeedItem uid="valueAxis" values="B품질" type="Measure"/> -->
+
+                            </viz:feeds>
+
+                        </viz:VizFrame>
                         </blocks>
                     </ObjectPageSubSection>
                 </subSections>

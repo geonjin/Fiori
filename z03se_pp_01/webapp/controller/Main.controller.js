@@ -49,6 +49,7 @@ sap.ui.define(
           this.oRouter.navTo("Detail", {
             layout: oNextUIState.layout,
             MT_COD: oData.MT_COD,
+          
           });
 
         },
