@@ -1,9 +1,12 @@
 sap.ui.define(
-    ["sap/ui/core/mvc/Controller"],
+    ["sap/ui/core/mvc/Controller",
+     "sap/ui/model/json/JSONModel",
+     "sap/ui/model/Filter"
+    ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller) {
+    function (Controller, JSONModel, Filter) {
       "use strict";
   
       return Controller.extend("z03sepp01.controller.DetailDetail", {
@@ -12,14 +15,38 @@ sap.ui.define(
           this.oRouter
             .getRoute("DetailDetail")
             .attachPatternMatched(this._onPatternMatched, this);
+            
+            var oData = new JSONModel({
+              list : []
+            })
+            this.getView().setModel(oData,"DetailDetail");
         },
   
         /**
          * Route Pattern이 URI와 일치할 경우 실행
          */
         _onPatternMatched: function (oEvent) {
-            console.log("DetailDetail Page 오픈")
-            this._product = oEvent.getParameters().arguments.product;
+           debugger;
+            var proNum = oEvent.getParameters().arguments.PRO_NUM;
+
+            var aFilter = [];
+
+            if(proNum){
+              var oFilter = new Filter('PRO_NUM','EQ',proNum);
+              aFilter.push(oFilter);
+            }
+            
+            var oModel = this.getView().getModel("DetailDetail");
+
+            this.getView().getModel().read(`/Z03SE_PPT_QUALSet`,{
+              
+              filters : aFilter,
+              success: function(oReturn){
+                debugger;
+                oModel.setProperty("/list",oReturn.results[0]);
+
+              }
+            })
         },
 
       /**

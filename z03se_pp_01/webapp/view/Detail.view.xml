@@ -60,13 +60,13 @@
                 </navigationActions>
 
                 <actions>
-                    <m:Button text="Go DetailDetail" type="Emphasized" press="onGoDetailDetail"/>
+                    <!-- <m:Button text="Go DetailDetail" type="Emphasized" press="onGoDetailDetail"/> -->
                 </actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
 
         <headerContent>
-            <m:Text text="headerContent Area"></m:Text>
+            <!-- <m:Text text="headerContent Area"></m:Text> -->
         </headerContent>
 
         <sections>
@@ -86,6 +86,7 @@
                                 visible : true
                             }
                          }"
+                         selectData="onGoDetailDetail"
                          
                          >
                             <!--dataset은 한개 까지 가능-->

@@ -3,32 +3,33 @@
 		xmlns:core="sap.ui.core"
         xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" 
 	xmlns:f="sap.ui.layout.form">
-    <Page title="Detail Detail Page" showNavButton="true" navButtonPress="onNavButtonPress">
+    <Page title="" showNavButton="true" navButtonPress="onNavButtonPress">
         <VBox class="sapUiSmallMargin">
             <f:SimpleForm
+                id="idSimple"
                 editable="false"
                 layout="ColumnLayout"
-                title="Supplier"
+                title="검수 정보 "
                 columnsM="2"
                 columnsL="3"
                 columnsXL="4"
                 >
                 <f:content>
-                    <core:Title text="Contact" />
-                    <Label text="Twitter" />
-                    <Text text="{Twitter}" />
-                    <Label text="Email" />
-                    <Text text="{Email}" />
-                    <Label text="Tel." />
-                    <Text text="{Tel}" />
-                    <Label text="SMS" />
-                    <Text text="{Sms}" />
-                    <Label text="Mobile" />
-                    <Text text="{Mobile}" />
-                    <Label text="Pager" />
-                    <Text text="{Pager}" />
-                    <Label text="Fax" />
-                    <Text text="{Fax}" />
+                    <core:Title text="검수 정보" />
+                    <Label text="생산오더번호" />
+                    <Text text="{DetailDetail>/list/PRO_NUM}" />
+                    <Label text="자재코드" />
+                    <Text text="{DetailDetail>/list/MT_COD}" />
+                    <Label text="A품질 수량" />
+                    <Text text="{DetailDetail>/list/A_INVENT}" />
+                    <Label text="B품질 수량" />
+                    <Text text="{DetailDetail>/list/B_INVENT}" />
+                    <Label text="단위" />
+                    <Text text="{DetailDetail>/list/IUNIT}" />
+                    <Label text="유통기한" />
+                    <Text text="{DetailDetail>/list/EX_DT}" />
+                
+                   
                 </f:content>
             </f:SimpleForm>
         </VBox>

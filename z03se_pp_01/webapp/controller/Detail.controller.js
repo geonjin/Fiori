@@ -107,11 +107,14 @@ sap.ui.define(
           });
         },
   
-        onGoDetailDetail: function() {
+        onGoDetailDetail: function(oEvent) {
+          
+          var value = oEvent.getParameters().data[0].data.생산번호
+
           this.oView.getParent().getParent().setLayout("ThreeColumnsMidExpanded");
           this.oRouter.navTo("DetailDetail", {
             layout: "ThreeColumnsMidExpanded",
-            product: this._product,
+            PRO_NUM: value,
           });
         }
       });

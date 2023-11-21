@@ -3,11 +3,12 @@ sap.ui.define(
       "sap/ui/core/mvc/Controller",
       "sap/f/LayoutType",
       "sap/ui/model/json/JSONModel",
+      "sap/ui/model/Filter"
     ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, LayoutType, JSONModel) {
+    function (Controller, LayoutType, JSONModel,Filter) {
       "use strict";
   
       return Controller.extend("z03sepp01.controller.Main", {
@@ -16,16 +17,7 @@ sap.ui.define(
           this.oView = this.getView();
   
           this.oView.setModel(
-            new JSONModel({
-              data: [
-                { name: "hihi", age: "123" },
-                { name: "hihi", age: "123" },
-                { name: "hihi", age: "123" },
-              ],
-              fullName: "My Name",
-            }),
-            "main"
-          );
+            new JSONModel({}),"main");
 
 
         },
@@ -60,6 +52,49 @@ sap.ui.define(
             layout: "MidColumnFullScreen",
             product: this._product
           });
+        },
+        onSearch(){
+ 
+          var oData = this.getView().getModel('main').getData();
+          var aFilter1 = [];
+
+          if(oData.OrdNum ){
+            var oFilter1 = new Filter({
+              path : 'ORD_NUM',
+              operator : 'EQ',
+              value1 : oData.OrdNum,
+              value2 : ''
+            });
+            aFilter1.push(oFilter1);
+          }
+debugger;
+          if(oData.MtCod ){
+            var oFilter1 = new Filter({
+              path : 'MT_COD',
+              operator : 'EQ',
+              value1 : oData.MtCod,
+              value2 : ''
+            });
+            aFilter1.push(oFilter1);
+          }
+
+          if(oData.OrdNum && oData.MtCod){
+            var oFilter1 = new Filter({
+              path : 'ORD_NUM',
+              operator : 'EQ',
+              value1 : oData.OrdNum,
+              value2 : oData.MtCod
+            });
+            aFilter1.push(oFilter1);
+          }
+          
+
+          this.byId("productTable").getBinding("items").filter(aFilter1);
+        },
+        onValueHelp(){
+          debugger;
+         
+
         }
   
       });

@@ -112,7 +112,7 @@
         },
         {
           "name": "DetailDetail",
-          "pattern": "detailDetail/{layout}/:product:",
+          "pattern": "detailDetail/{layout}/:PRO_NUM:",
           "target": ["mainView", "detailView", "detailDetail"]
         }
       ],
